@@ -54,15 +54,11 @@ def trendingplaces(WOEID=1):
         rtrend = requests.get(TRENDS_PLACE + str(WOEID), auth=auth)
         rtrend_return = json.loads(rtrend.content)
         for place in rtrend_return:
-            while True: 
-                if place['trends'][a]['name'] > 0 :
-                    topic = place['trends'][a]['name']
-                    urls = place['trends'][a]['url']
-                    print type(urls)
-                    print("Trending Topics %s for more info %s " % (topic, str(urls)))
-                    a += 1
-                else:
-                   print "done"
+            while a < 10:
+                topic = place['trends'][a]['name']
+                urls = place['trends'][a]['url']
+                print("Trending Topics %s for more info %s " % (topic, str(urls)))
+                a += 1
 
     except (requests.exceptions.RequestException,Exception) as e:
       print e 
